@@ -7,7 +7,6 @@ SAVEHIST=100000
 export EDITOR='nvim'
 export VISUAL='nvim'
 
-#setopt append_history
 setopt inc_append_history
 setopt extended_history
 setopt hist_ignore_space
@@ -15,22 +14,25 @@ setopt hist_find_no_dups
 setopt hist_ignore_all_dups
 setopt hist_expire_dups_first
 setopt interactive_comments
-#setopt share_history
 
+# Emacs bindings
 bindkey -e
-# ctrl-left and ctrl-right
-bindkey "\e[1;5D" backward-word
-bindkey "\e[1;5C" forward-word
-# ctrl-bs and ctrl-del
-bindkey "\e[3;5~" kill-word
-bindkey "\C-_"    backward-kill-word
-# del, home and end
-bindkey "\e[3~" delete-char
-bindkey "\e[H"  beginning-of-line
-bindkey "\e[F"  end-of-line
-# alt-bs
-bindkey "\e\d" undo
 
+# Custom key bindings. Get key codes with "showkey -a" or "cat >/dev/null"
+# ctrl-left and ctrl-right
+bindkey '^[[1;5D' backward-word
+bindkey '^[[1;5C' forward-word
+
+# ctrl-bs and ctrl-del
+bindkey '^H'      backward-kill-word
+bindkey '^[[3;5~' kill-word
+
+# del, home, end
+bindkey '^[[3~' delete-char
+bindkey '^[[H'  beginning-of-line
+bindkey '^[[F'  end-of-line
+
+# Completions for docker
 fpath=(/usr/share/zsh/vendor-completions $fpath)
 
 zstyle ':completion:*' verbose yes
@@ -53,10 +55,9 @@ compinit
 autoload -Uz tetriscurses
 alias tetris='tetriscurses'
 
-autoload edit-command-line
+autoload -Uz edit-command-line
 zle -N edit-command-line
-bindkey '^Xe' edit-command-line
-bindkey '^X^e' edit-command-line
+bindkey '^X^E' edit-command-line
 
 alias l='ls -ltr --color=auto'
 alias la='ls -la --color=auto'
